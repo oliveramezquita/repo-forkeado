@@ -12,7 +12,7 @@ const notifications = [
         user: {
             name: 'Dennis',
             surname: 'Nedry',
-            photo_url: 'http://localhost:8000/storage/sample_avatar.jpeg',
+            photo_url: '/storage/sample_avatar.jpeg',
         },
         action: 'commented',
         over: 'Calificaciones - Lenguaje Musical',
@@ -25,7 +25,7 @@ const notifications = [
         user: {
             name: 'Pablo',
             surname: 'Jiménez',
-            photo_url: 'http://localhost:8000/storage/sample_avatar.jpeg',
+            photo_url: '/storage/sample_avatar.jpeg',
         },
         action: 'shared',
         over: 'Concierto de Arte Musical Contemporáneo',
@@ -37,7 +37,7 @@ const notifications = [
         user: {
             name: 'Dennis',
             surname: 'Nedry',
-            photo_url: 'http://localhost:8000/storage/sample_avatar.jpeg',
+            photo_url: '/storage/sample_avatar.jpeg',
         },
         action: 'commented',
         over: 'Calificaciones - Lenguaje Musical',
@@ -50,7 +50,7 @@ const notifications = [
         user: {
             name: 'Pablo',
             surname: 'Jiménez',
-            photo_url: 'http://localhost:8000/storage/sample_avatar.jpeg',
+            photo_url: '/storage/sample_avatar.jpeg',
         },
         action: 'shared',
         over: 'Concierto de Arte Musical Contemporáneo',

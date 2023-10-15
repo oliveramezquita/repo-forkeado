@@ -17,33 +17,34 @@ class SubstitutionController extends Controller
     {
 
         // Create a collection of teachers with random names (id, name, surname, dni, substitution_state)
+        $url = config('app.url');
         $substitutions = collect([
             [
                 'id' => 1,
                 'name' => 'Juan',
                 'surname' => 'Perez',
-                'photo_url' => 'http://localhost:8000/storage/sample_avatar.jpeg',
+                'photo_url' => $url . '/storage/sample_avatar.jpeg',
                 'state' => 'Cancelado Temporalmente',
             ],
             [
                 'id' => 2,
                 'name' => 'Pedro',
                 'surname' => 'Garcia',
-                'photo_url' => 'http://localhost:8000/storage/sample_avatar.jpeg',
+                'photo_url' => $url . '/storage/sample_avatar.jpeg',
                 'state' => 'Asignado a otro profesor',
             ],
             [
                 'id' => 3,
                 'name' => 'Pablo',
                 'surname' => 'Gonzalez',
-                'photo_url' => 'http://localhost:8000/storage/sample_avatar.jpeg',
+                'photo_url' => $url . '/storage/sample_avatar.jpeg',
                 'state' => 'Cambio de día',
             ],
             [
                 'id' => 4,
                 'name' => 'Jose',
                 'surname' => 'Rodriguez',
-                'photo_url' => 'http://localhost:8000/storage/sample_avatar.jpeg',
+                'photo_url' => $url . '/storage/sample_avatar.jpeg',
                 'state' => 'Sin asignar',
             ],
         ]);
