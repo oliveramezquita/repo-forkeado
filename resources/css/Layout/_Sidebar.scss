@@ -1,0 +1,254 @@
+/* Pre css */
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ul {
+  padding: 0;
+  margin-left: 2rem;
+}
+.nav_image {
+  display: flex;
+  min-width: 55px;
+  justify-content: center;
+}
+
+.nav_image img {
+  //height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  z-index: 1000;
+  top: 72px;
+  left: 0;
+  height: 100%;
+  width: 32rem;
+  transition: all 0.4s ease;
+  border-radius: 0rem 1.25rem 0rem 0rem;
+  background: var(--neutral-component-background, #fff);
+  box-shadow: 0px 0px 8px 0px rgba(39, 82, 108, 0.3);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.sidebar.close {
+  width: calc(3.125rem + 3rem);
+}
+
+.logo_items {
+  gap: 8px;
+}
+
+.logo_name {
+  font-size: 22px;
+  color: #333;
+  font-weight: 500px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.close .logo_name,
+.sidebar.close #lock-icon,
+.sidebar.close #sidebar-close {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+#lock-icon,
+#sidebar-close {
+  padding: 0px;
+  color: #2b5db6;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: -1rem;
+  transition: all 0.3s ease;
+}
+
+#sidebar-close {
+  display: none;
+  color: #333;
+}
+
+
+
+.menu_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.menu_content::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+.menu_title {
+  position: relative;
+  height: 50px;
+  width: 55px;
+}
+
+.menu_title .title {
+  /* margin-left: 15px; */
+  transition: all 0.3s ease;
+}
+
+.menu_item {
+  margin: 0rem 0rem 0rem 0rem;
+  
+}
+
+.sidebar.close .title {
+  opacity: 0;
+}
+.item{
+  list-style: none;
+}
+
+.item .is_active {
+  background-color: #2b5db6;
+  font-weight: 700;
+  color: #fff;
+}
+
+.submenu .item {
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.submenu_item.is_active + .submenu {
+  background-color: #3c7ff8;
+
+
+}
+.submenu_item.is_active + .submenu span {
+  color: #fff;
+  font-weight: 500;
+}
+.submenu_item.is_active + .submenu .item {
+  transform: translateX(-2rem);
+}
+.submenu_item.is_active > .arrow-down {
+  transition: all 0.5s ease;
+  transform: rotate(180deg);
+}
+.submenu {
+  max-height: 0; /* Inicialmente no se permite altura */
+  overflow: hidden; /* Oculta el contenido cuando el submenu está colapsado */
+  transform-origin: top; /* Para la animación scaleY() */
+  transform: scaleY(0); /* Inicialmente, el submenu está colapsado */
+  transition: max-height 0.22s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* transición para max-height, transform y opacidad */
+  opacity: 0; /* Hacemos que inicialmente esté invisible */
+  margin-left: 0rem;
+}
+
+.show_submenu ~ .submenu {
+  max-height: 500px; /* Un valor estimado, deberías ajustarlo según el posible tamaño máximo de tu submenu */
+  transform: scaleY(1); /* Despliega el submenu */
+  opacity: 1; /* Hace el submenu visible */
+}
+
+/* Reset de márgenes y rellenos para los elementos dentro del submenu */
+.submenu > * {
+  margin: 0;
+  padding: 0;
+}
+
+.submenu::before {
+  content: ""; /* Esencial para que se muestre el pseudo-elemento */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #3c7ff8; /* El color que quieres para el fondo */
+  z-index: -1; /* Para que se muestre detrás del contenido real del submenu */
+  transform-origin: top; /* Importante para la animación */
+  transform: scaleY(0); /* Inicialmente colapsado, al igual que el contenido del submenu */
+  transition: transform 0.3s ease-in-out; /* Anima transform para el despliegue/recolgado */
+}
+
+.show_submenu ~ .submenu::before {
+  transform: scaleY(1); /* Despliega el fondo */
+}
+
+
+.show_submenu ~ .submenu {
+  display: block;
+}
+
+
+.link {
+  text-decoration: none;
+  margin-bottom: 0rem;
+  color: #2b5db6;
+  width: 32rem;
+  padding: 1.5rem 0.75rem 1.5rem 2.3rem;
+}
+
+.link:hover {
+  font-weight: 700;
+}
+
+.link span {
+  white-space: nowrap;
+  margin-left: 2rem;
+}
+
+.link .arrow-down {
+  transition: all 0.3s ease;
+  font-size: 2.2rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+ .link-active{
+  border-left: 0.3rem solid #fff;
+  margin-left: 2rem;
+  padding-left: 0rem;
+}
+
+#sidebar-open {
+  font-size: 3rem;
+  color: #333;
+  cursor: pointer;
+  margin-right: 2rem;
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar {
+    left: 0;
+    z-index: 1000;
+  }
+
+  .sidebar.close {
+    left: -100%;
+  }
+
+  #sidebar-close {
+    display: block;
+  }
+
+  #lock-icon {
+    display: none;
+  }
+
+  #sidebar-open {
+    display: block;
+  }
+}
+
+/*Esto es un parche temporal, básicamente le mete un espacio debajo al sidebar para "empujarlo" 
+y ya si desplaza todo lo que debería, he probado todo el tema de heights 
+y tras mil quebraderos me he dado cuenta de que es siempre el mismo espacio el que faltaba al hacer scroll */
+.sidebar_padding {
+  padding-top: 7rem; 
+}

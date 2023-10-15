@@ -1,0 +1,202 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/variables-dark';
+@import '../../node_modules/bootstrap/scss/maps';
+@import '../../node_modules/bootstrap/scss/mixins';
+@import '../../node_modules/bootstrap/scss/utilities';
+// @import './normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import './app.css';
+
+//custom variables
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 6,
+  6_5: $spacer * 9,
+  7: $spacer * 12,
+  8: $spacer * 24,
+  9: $spacer * 48
+);
+// Custom css here
+
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'padding': (
+      responsive: true,
+      property: padding,
+      class: p,
+      values: $spacers
+    ),
+    'margin': (
+      responsive: true,
+      property: margin,
+      class: m,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto
+          )
+        )
+    ),
+    'margin-x': (
+      responsive: true,
+      property: margin-right margin-left,
+      class: mx,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto
+          )
+        )
+    ),
+    'margin-y': (
+      responsive: true,
+      property: margin-top margin-bottom,
+      class: my,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto
+          )
+        )
+    ),
+    'margin-top': (
+      responsive: true,
+      property: margin-top,
+      class: mt,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto
+          )
+        )
+    ),
+    'margin-end': (
+      responsive: true,
+      property: margin-right,
+      class: me,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto
+          )
+        )
+    ),
+    'margin-bottom': (
+      responsive: true,
+      property: margin-bottom,
+      class: mb,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto
+          )
+        )
+    ),
+    'margin-start': (
+      responsive: true,
+      property: margin-left,
+      class: ms,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto
+          )
+        )
+    )
+  )
+);
+
+// .form-control {
+//   width: 100%;
+//   height: 4rem;
+//   border-radius: 3rem;
+//   border: 1px solid #2b5db6;
+//   background: #fff;
+//   font-size: 1.5rem;
+//   text-align: center;
+// }
+
+// .form-control::placeholder {
+//   color: #ACB7BA;
+// }
+
+
+// .submitButton {
+// 	width: 100%;
+// 	height: 4rem;
+//   font-size: 1.4rem;
+// 	background-color: #3C7FF8;
+// 	border-radius: 2rem;
+// 	color: #fff;
+// 	border: none;
+// 	font-weight: 600;
+// }
+.disableButton {
+	width: 100%;
+	height: 4rem;
+  font-size: 1.4rem;
+	background-color: #fff;
+	border-radius: 2rem;
+	color: #FF5252;
+	border: 2px solid #FF5252;
+	font-weight: 600;
+}
+.disableButton:hover {
+	background-color: #FF5252;
+	color: #fff;
+	border: 2px solid #FF5252;
+	
+}
+// .form-label {
+//   font-weight: 500;
+//   font-size: 1.7rem;
+//   color: #222038;
+// }
+.bg-primary {
+  background-color: #266ff2;
+}
+.container-rounded{
+  margin: 1rem 0rem;
+  border-radius: 3rem;
+  transition: all 0.3s ease;
+}
+
+
+
+@import '../../node_modules/bootstrap/scss/utilities/api';
+@import '../../node_modules/bootstrap5-toggle/css/bootstrap5-toggle.min.css';
+
+
+//Colores y forma de la barra lateral
+
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: #E8E8E8;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #3C7FF8;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #1e6ef7;
+}

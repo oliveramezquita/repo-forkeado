@@ -1,0 +1,17 @@
+{
+    "name": "Amadeus",
+    "short_name": "Amadeus",
+    "start_url": "/index.php",
+    "background_color": "#266FF2",
+    "description": "Amadeus Magister",
+    "display": "fullscreen",
+    "theme_color": "#266FF2",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

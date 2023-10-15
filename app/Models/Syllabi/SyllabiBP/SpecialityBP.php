@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Models\Syllabi\SyllabiBP;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+
+class SpecialityBP extends Model implements Auditable
+{
+    use HasFactory;
+    use \OwenIt\Auditing\Auditable;
+
+    protected $table = 'specialities_blueprint';
+
+    /**
+     * Attributes to exclude from the Audit.
+     *
+     * @var array
+     */
+    protected $auditExclude = [
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = ['id'];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'is_active' => 'boolean',
+    ];
+
+    public function syllabis()
+    {
+        return $this->belongsToMany(SyllabiBP::class, 'speciality_syllabi_blueprint', 'speciality_id', 'syllabi_id');
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(SubjectBP::class, 'speciality_id');
+    }
+}
