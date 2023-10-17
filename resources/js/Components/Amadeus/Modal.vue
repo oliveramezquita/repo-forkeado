@@ -54,6 +54,9 @@ export default {
     z-index: 1200;
 }
 
+/**
+* Modified the height of the modal, from a fixed height of 45rem to a minimum height
+*/
 .modal-content {
     display: flex;
     border-radius: 3.125rem;

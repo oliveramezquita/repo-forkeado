@@ -95,6 +95,7 @@ const filteredDepartments = props.departments.map(department => ({
 
         <label class="form-label">Opciones</label>
         <div class="my-3 d-flex flex-row">
+            <!-- Validations were added to note the checked values -->
             <div class="col-5">
                 <div class="form-check form-switch">
                     <input class="form-check-input switch-rotate" type="checkbox" role="switch" id="switch_is_collective"
@@ -117,6 +118,7 @@ const filteredDepartments = props.departments.map(department => ({
             </div>
         </div>
 
+        <!-- Added Bootstrap classes for element spacing -->
         <div class="my-3 d-flex flex-row">
             <div class="col-5">
                 <label for="student_ratio" class="form-label">Ratio de alumnos</label>
@@ -162,6 +164,9 @@ const filteredDepartments = props.departments.map(department => ({
     font-weight: 500;
 }
 
+/**
+* Three classes were added to adapt the subject modal to how desired in the Figma design
+*/
 .switch-rotate {
     transform: rotate(90deg);
     margin-top: 15px;
