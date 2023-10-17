@@ -15,10 +15,16 @@ const props = defineProps({
     obj: Object,
     coursesDict: Array
 });
-const emit = defineEmits(['updateItem']);
+/**
+ * The emit updateObj is defined, a function found in the Elements.vue
+ */
+const emit = defineEmits(['updateObj']);
 
+/**
+ * Local function that emits the event
+ */
 const update = (obj, dict) => {
-    emit('updateItem', 'course', 'Curso', obj, dict)
+    emit('updateObj', 'course', 'Curso', obj, dict)
 }
 </script>
 
@@ -36,6 +42,10 @@ const update = (obj, dict) => {
                 </div>
 
                 <div class="target-info">
+                    <!--
+                        - The click event is added to the local update function
+                        - The modal target is modified and now points to the single modal for modifications
+                    -->
                     <a v-if="permissions.includes('course.update')" type="button" class="taget-info-edit"
                         :class="{ specialHidden: !isHovered }" @click="update(props.obj, props.coursesDict)"
                         data-bs-toggle="modal" data-bs-target="#updateItemModal">

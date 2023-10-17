@@ -48,12 +48,22 @@ const props = defineProps({
 });
 
 const selectedType = ref('0');
+/**
+ * The following elements are created:
+ * elementType: Defines the type of element (course, degree, specialty, subject, ...)
+ * elementTitle: Defines the title of the element (Curso, Grado, Especialidad, Asignatura, ...)
+ * selectedObj: Selected object to modify
+ * selectedDict: Selected array or list object to modify
+ */
 const elementType = ref('');
 const elementTitle = ref('');
 const selectedObj = ref(null);
-const selectedDict = ref([]);
+const selectedDict = ref(null);
 
-const handleUpdateItem = (element, title, obj, dict) => {
+/**
+ * A handleUpdateItem is a function that will be emit from the components
+ */
+const handleUpdateObj = (element, title, obj, dict) => {
     elementType.value = element;
     elementTitle.value = title;
     selectedObj.value = obj;
@@ -74,7 +84,8 @@ const handleUpdateItem = (element, title, obj, dict) => {
                 <div class="custom-flex">
                     <Title title="Grados" />
                     <div v-for="degree in orderedDegrees" :key="degree.id">
-                        <DegreeElementTarget :obj="degree" />
+                        <!-- Emit updateObj is associated with local function handleUpdateObj -->
+                        <DegreeElementTarget :obj="degree" @updateObj="handleUpdateObj" />
                     </div>
                 </div>
 
@@ -82,7 +93,8 @@ const handleUpdateItem = (element, title, obj, dict) => {
                 <div class="custom-flex">
                     <Title title="Cursos" />
                     <div v-for="course in orderedCourses" :key="course.id">
-                        <CourseElementTarget :obj="course" :coursesDict="coursesDict" @updateItem="handleUpdateItem" />
+                        <!-- Emit updateObj is associated with local function handleUpdateObj -->
+                        <CourseElementTarget :obj="course" :coursesDict="coursesDict" @updateObj="handleUpdateObj" />
                     </div>
                 </div>
 
@@ -96,7 +108,9 @@ const handleUpdateItem = (element, title, obj, dict) => {
                 <div class="custom-flex">
                     <Title title="Especialidades" />
                     <div v-for="speciality in orderedSpecialities" :key="speciality.id">
-                        <SpecialityElementTarget :obj="speciality" :departments="departments" />
+                        <!-- Emit updateObj is associated with local function handleUpdateObj -->
+                        <SpecialityElementTarget :obj="speciality" :departments="departments"
+                            @updateObj="handleUpdateObj" />
                     </div>
                 </div>
 
@@ -104,7 +118,8 @@ const handleUpdateItem = (element, title, obj, dict) => {
                 <div class="custom-flex">
                     <Title title="Asignaturas" />
                     <div v-for="subject in orderedSubjects" :key="subject.id">
-                        <SubjectElementTarget :obj="subject" :departments="departments" />
+                        <!-- Emit updateObj is associated with local function handleUpdateObj -->
+                        <SubjectElementTarget :obj="subject" :departments="departments" @updateObj="handleUpdateObj" />
                     </div>
                 </div>
 
@@ -156,13 +171,28 @@ const handleUpdateItem = (element, title, obj, dict) => {
                 </div>
             </template>
         </Modal>
+        <!-- A single modal is created at the element level to modify the different objects -->
         <Modal id="updateItemModal">
             <template #modal-header>
                 Modificar {{ elementTitle }}
             </template>
             <template #modal-body>
-                <CourseModal v-if="selectedObj" :key='elementType + selectedObj.id' edit=true :obj="selectedObj"
-                    :coursesDict="selectedDict" />
+                <!-- Conditions are used to manage the content of the modal according to the element -->
+                <div v-if="elementType === 'degree'">
+                    <DegreeModal v-if="selectedObj" :key='elementType + selectedObj.id' edit=true :obj="selectedObj" />
+                </div>
+                <div v-if="elementType === 'course'">
+                    <CourseModal v-if="selectedObj" :key='elementType + selectedObj.id' edit=true :obj="selectedObj"
+                        :coursesDict="selectedDict" />
+                </div>
+                <div v-if="elementType === 'speciality'">
+                    <SpecialityModal v-if="selectedObj" :key='elementType + selectedObj.id' edit=true :obj="selectedObj"
+                        :departments="selectedDict" />
+                </div>
+                <div v-if="elementType === 'subject'">
+                    <SubjectModal v-if="selectedObj" :key='elementType + selectedObj.id' edit=true :obj="selectedObj"
+                        :departments="selectedDict" />
+                </div>
             </template>
         </Modal>
 

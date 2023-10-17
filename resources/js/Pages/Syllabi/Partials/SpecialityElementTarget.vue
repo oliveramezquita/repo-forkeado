@@ -11,81 +11,71 @@ const isHovered = ref(false);
 
 const modalId = "updateSpecialitySyllabi"
 
-const props = defineProps ({
-	obj: Object,
+const props = defineProps({
+    obj: Object,
     departments: Object,
 });
+/**
+ * The emit updateObj is defined, a function found in the Elements.vue
+ */
+const emit = defineEmits(['updateObj']);
 
-
-
-
+/**
+ * Local function that emits the event
+ */
+const update = (obj, dict) => {
+    emit('updateObj', 'speciality', 'Especialidad', obj, dict)
+}
 </script>
-
-<script>
-
-</script>
-
-
 
 <template>
     <div @mouseenter="isHovered = true" @mouseleave="isHovered = false" class="outer-wrapper">
-        
-            <NonCollapsableContainer :is-active="props.obj.is_active">
-                
-                
-                
-                <template #noncollapsablecontainer>
-                    
-                    
-                    <div class="content-wrapper">
-                        
-                        <div>
-                            <span class="target-text" :class="{ 'target-text-disabled': !props.obj.is_active }">
-                                {{ props.obj.name }}
-                            </span>
-                            <span v-if="props.obj.is_active === false" class="text-danger ml-4 disabled"></span>
-                        </div>
-                        
-                        <div class="target-info">
-                            <a v-if="permissions.includes('speciality.update')" 
-                            type="button" 
-                            class="taget-info-edit" 
-                            :class="{ specialHidden: !isHovered }" 
-                            data-bs-toggle="modal" 
-                            :data-bs-target='"#" + modalId + props.obj.id'>
-                                <i class="fa-regular fa-gear fa-spin"></i>
-                            </a>
-                        </div>
+
+        <NonCollapsableContainer :is-active="props.obj.is_active">
+
+
+
+            <template #noncollapsablecontainer>
+
+
+                <div class="content-wrapper">
+
+                    <div>
+                        <span class="target-text" :class="{ 'target-text-disabled': !props.obj.is_active }">
+                            {{ props.obj.name }}
+                        </span>
+                        <span v-if="props.obj.is_active === false" class="text-danger ml-4 disabled"></span>
                     </div>
 
-                </template>
+                    <div class="target-info">
+                        <!--
+                            - The click event is added to the local update function
+                            - The modal target is modified and now points to the single modal for modifications
+                        -->
+                        <a v-if="permissions.includes('speciality.update')" type="button" class="taget-info-edit"
+                            :class="{ specialHidden: !isHovered }" @click="update(props.obj, props.departments)"
+                            data-bs-toggle="modal" data-bs-target="#updateItemModal">
+                            <i class="fa-regular fa-gear fa-spin"></i>
+                        </a>
+                    </div>
+                </div>
 
-                
-            </NonCollapsableContainer>
-        
-        <Modal :id='modalId + props.obj.id'>
-            <template #modal-header>
-                Actualizar Especialidad
             </template>
-            
-            <template #modal-body>
-                <SpecialityModal edit=true :obj="props.obj" :departments="props.departments" />
-            </template>
-        </Modal>
+
+
+        </NonCollapsableContainer>
     </div>
 </template>
 
 <style scoped>
-
-
-
 .relative-container {
     position: relative;
 }
 
 .taget-info-edit {
     position: absolute;
-    right: -2rem; /* Ajusta este valor según lo lejos que quieras que esté el ícono de la tarjeta */
+    right: -2rem;
+    /* Ajusta este valor según lo lejos que quieras que esté el ícono de la tarjeta */
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
@@ -103,7 +93,7 @@ const props = defineProps ({
     font-weight: 600;
     font-size: 1.4rem;
     margin-right: 2rem;
-    
+
 }
 
 .target-text-disabled {
@@ -118,8 +108,7 @@ const props = defineProps ({
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding-right: rem; /* Igual al padding original de container-target, para mantener el espacio */
-    }
-
-
+    padding-right: rem;
+    /* Igual al padding original de container-target, para mantener el espacio */
+}
 </style>
