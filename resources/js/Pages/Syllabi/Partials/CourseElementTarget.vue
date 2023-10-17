@@ -11,18 +11,22 @@ const isHovered = ref(false);
 
 const modalId = "updateCourseSyllabi"
 
-const props = defineProps ({
-	obj: Object,
-    coursesDict: Array,
+const props = defineProps({
+    obj: Object,
+    coursesDict: Array
 });
+const emit = defineEmits(['updateItem']);
 
+const update = (obj, dict) => {
+    emit('updateItem', 'course', 'Curso', obj, dict)
+}
 </script>
 
 <template>
     <div @mouseenter="isHovered = true" @mouseleave="isHovered = false" class="outer-wrapper">
-        
+
         <NonCollapsableContainer :is-active="props.obj.is_active">
-            
+
             <template #noncollapsablecontainer>
                 <div>
                     <span class="target-text" :class="{ 'target-text-disabled': !props.obj.is_active }">
@@ -30,38 +34,24 @@ const props = defineProps ({
                     </span>
                     <span v-if="props.obj.is_active === false" class="text-danger ml-4 disabled"></span>
                 </div>
-                
+
                 <div class="target-info">
-                    <a v-if="permissions.includes('course.update')" 
-                       type="button" 
-                       class="taget-info-edit" 
-                       :class="{ specialHidden: !isHovered }" 
-                       data-bs-toggle="modal" 
-                       :data-bs-target='"#" + modalId + props.obj.id'>
+                    <a v-if="permissions.includes('course.update')" type="button" class="taget-info-edit"
+                        :class="{ specialHidden: !isHovered }" @click="update(props.obj, props.coursesDict)"
+                        data-bs-toggle="modal" data-bs-target="#updateItemModal">
                         <i class="fa-regular fa-gear fa-spin"></i>
                     </a>
                 </div>
             </template>
-        
-        </NonCollapsableContainer>
 
-        <Modal :id='modalId + props.obj.id'>
-            <template #modal-header>
-                Actualizar Curso
-            </template>
-            
-            <template #modal-body>
-                <CourseModal edit=true :obj="props.obj" :coursesDict="props.coursesDict" />
-            </template>
-        </Modal>
+        </NonCollapsableContainer>
     </div>
 </template>
 
 
 <style scoped>
-
 .outer-wrapper {
-    align-items: center; 
+    align-items: center;
     /* Aquí puedes añadir más estilos si es necesario para ajustar la posición y el diseño */
 }
 
@@ -72,7 +62,8 @@ const props = defineProps ({
 
 .taget-info-edit {
     position: absolute;
-    right: -2rem; /* Ajusta este valor según lo lejos que quieras que esté el ícono de la tarjeta */
+    right: -2rem;
+    /* Ajusta este valor según lo lejos que quieras que esté el ícono de la tarjeta */
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
@@ -90,7 +81,7 @@ const props = defineProps ({
     font-weight: 600;
     font-size: 1.4rem;
     margin-right: 2rem;
-    
+
 }
 
 .target-text-disabled {
@@ -105,8 +96,7 @@ const props = defineProps ({
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding-right: rem; /* Igual al padding original de container-target, para mantener el espacio */
-    }
-
-
+    padding-right: rem;
+    /* Igual al padding original de container-target, para mantener el espacio */
+}
 </style>

@@ -51,7 +51,7 @@ const submit = () => {
         form.post(createRoute, {
             onSuccess: () => {
                 form.reset();
-                selectedNumber = ''; 
+                selectedNumber = '';
             },
         });
     } else {
@@ -71,7 +71,7 @@ const activate = () => {
 
 <template>
     <form @submit.prevent="submit">
-        
+
         <div class="my-3">
             <label for="number" class="form-label">Número</label>
             <select v-model="selectedNumber" class="input-select" id="number" required>
@@ -88,13 +88,20 @@ const activate = () => {
         </div>
 
         <div class="d-flex flex-column mt-4">
-            <ButtonGeneric class="btn submit-button w-100 mb-3" :class="{ 'opacity-25,': form.processing }" :disabled="form.processing">
+            <ButtonGeneric class="btn submit-button w-100 mb-3" :class="{ 'opacity-25,': form.processing }"
+                :disabled="form.processing">
                 {{ props.edit === 'false' ? 'Crear' : 'Actualizar' }}
             </ButtonGeneric>
-            <DangerButton v-if="props.edit === 'true' && props.obj.is_active == '1' && permissions.includes('course.destroy')" class="btn submit-button w-100" :class="{ 'opacity-25,': form.processing }" :disabled="form.processing" @click="destroy">
+            <DangerButton
+                v-if="props.edit === 'true' && props.obj.is_active == '1' && permissions.includes('course.destroy')"
+                class="btn submit-button w-100" :class="{ 'opacity-25,': form.processing }" :disabled="form.processing"
+                @click="destroy">
                 Desactivar
             </DangerButton>
-            <SecondaryButton v-if="props.edit === 'true' && props.obj.is_active == '0' && permissions.includes('course.activate')" class="btn submit-button w-100" :class="{ 'opacity-25,': form.processing }" :disabled="form.processing" @click="activate">
+            <SecondaryButton
+                v-if="props.edit === 'true' && props.obj.is_active == '0' && permissions.includes('course.activate')"
+                class="btn submit-button w-100" :class="{ 'opacity-25,': form.processing }" :disabled="form.processing"
+                @click="activate">
                 Reactivar
             </SecondaryButton>
         </div>
@@ -106,11 +113,10 @@ const activate = () => {
             </ul>
         </div>
     </form>
-
 </template>
 
 <style scoped>
-.input-text{
+.input-text {
     background-color: #e8e8e8;
     color: grey;
     border-color: #929191;
@@ -124,8 +130,4 @@ const activate = () => {
 
 .submit-button {
     margin-top: 6rem;
-}
-
-
-
-</style>
+}</style>
