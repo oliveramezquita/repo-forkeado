@@ -2,15 +2,15 @@
 import { onUpdated } from 'vue';
 export default {
 
-setup() {
-    onUpdated(() => {
-        document
-        .querySelectorAll('input[type=checkbox][data-toggle="toggle"]')
-        .forEach(function (ele) {
-            ele.bootstrapToggle()
+    setup() {
+        onUpdated(() => {
+            document
+                .querySelectorAll('input[type=checkbox][data-toggle="toggle"]')
+                .forEach(function (ele) {
+                    ele.bootstrapToggle()
+                })
         })
-    })
-}
+    }
 }
 </script>
 
@@ -21,7 +21,8 @@ setup() {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="container-btn-close">
-                    <a  data-bs-dismiss="modal" aria-label="Close" class="cursor-pointer"><i class="fa-regular fa-xmark"></i></a>
+                    <a data-bs-dismiss="modal" aria-label="Close" class="cursor-pointer"><i
+                            class="fa-regular fa-xmark"></i></a>
                 </div>
                 <div class="modal-header w-100">
                     <p class="modal-title">
@@ -37,12 +38,13 @@ setup() {
 </template>
 
 <style>
-.container-btn-close{
+.container-btn-close {
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
 }
-.fa-xmark{
+
+.fa-xmark {
     color: #3C7FF8;
     font-size: 1.5rem;
 }
@@ -57,7 +59,7 @@ setup() {
     border-radius: 3.125rem;
     border: 3px solid #3C7FF8;
     background: #FFF;
-    height: 45rem;
+    min-height: 45rem;
     padding: 3.5rem 5.5rem;
     flex-direction: column;
     align-items: flex-start;
@@ -79,10 +81,8 @@ div.modal-dialog.modal-dialog-centered {
     font-size: 2rem;
     font-weight: 600;
 }
-.modal-body{
+
+.modal-body {
     padding: 0;
 }
-
-
-
 </style>
