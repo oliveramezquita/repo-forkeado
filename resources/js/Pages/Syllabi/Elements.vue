@@ -1,3 +1,8 @@
+// Nombre - Oliver Amézquita Morales
+// Me costo entrar en ritmo con Vue.js pero bastaron unas pocas horas para ponerme en ritmo
+// Creo que lo más desafiante de la prueba técnica fue realizar la comunicación entre componentes
+// Las tres funcionalidades fueron realizadas además de algunas otras correcciones en funcionalidad y estética de la aplicación 
+
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Title from '@/Components/Amadeus/Title.vue';
