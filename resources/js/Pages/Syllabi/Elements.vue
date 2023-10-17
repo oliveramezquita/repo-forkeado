@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Title from '@/Components/Amadeus/Title.vue';
 import Modal from '@/Components/Amadeus/Modal.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 import { permissions } from '@/utils/inertiaUtils';
@@ -16,6 +16,8 @@ import DegreeModal from '@/Pages/Syllabi/Partials/DegreeModal.vue';
 import CourseModal from '@/Pages/Syllabi/Partials/CourseModal.vue';
 import SpecialityModal from '@/Pages/Syllabi/Partials/SpecialityModal.vue';
 import SubjectModal from '@/Pages/Syllabi/Partials/SubjectModal.vue';
+
+const page = usePage();
 
 const orderList = (list) => {
     return list.slice().sort((a, b) => {
@@ -68,6 +70,22 @@ const handleUpdateObj = (element, title, obj, dict) => {
     elementTitle.value = title;
     selectedObj.value = obj;
     selectedDict.value = dict;
+
+    /**
+     * Every time the generic modal is called for modifications, 
+     * the success props as well as the error props are set to null
+     */
+    page.props.flash.success = null;
+    page.props.errors = null;
+}
+
+/**
+ * When you change elements in the modal to create objects, 
+ * the success and error props are assigned null
+ */
+const setPageProps = () => {
+    page.props.flash.success = null;
+    page.props.errors = null;
 }
 </script>
 
@@ -145,7 +163,7 @@ const handleUpdateObj = (element, title, obj, dict) => {
             <template #modal-body>
                 <div class="mb-3">
                     <label for="typeItem" class="button-label"></label>
-                    <select class="input-select" id="typeItem" v-model="selectedType">
+                    <select class="input-select" id="typeItem" v-model="selectedType" @change="setPageProps">
                         <option value="0" selected disabled>Seleccione un tipo</option>
                         <option value="1" v-if="permissions.includes('degree.store')">Grados</option>
                         <option value="2" v-if="permissions.includes('course.store')">Curso</option>Curso
